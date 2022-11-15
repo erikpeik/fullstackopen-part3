@@ -90,7 +90,11 @@ app.put('/api/persons/:id', (req, res, next) => {
     context: 'query',
   })
     .then((updatedPerson) => {
-      return res.json(updatedPerson)
+      if (updatedPerson) {
+        return res.json(updatedPerson)
+      } else {
+        return res.status(404).end()
+      }
     })
     .catch((error) => next(error))
 })
