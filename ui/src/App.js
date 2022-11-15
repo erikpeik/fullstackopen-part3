@@ -110,9 +110,13 @@ const App = () => {
 						setTimeout(() => { setMessage(null) }, 5000)
 					})
 					.catch(error => {
-						setPersons(persons.filter(p => p.id !== person.id))
 						setColor('red')
-						setMessage(`Information of ${newName} has already been removed from server`)
+						if (error.response?.data?.error === undefined) {
+							setPersons(persons.filter(p => p.id !== person.id))
+							setMessage(`Information of ${newName} has already been removed from server`)
+						} else {
+							setMessage(error.response?.data?.error)
+						}
 						setTimeout(() => {
 							setMessage(null)
 							setColor('green')
@@ -126,6 +130,14 @@ const App = () => {
 					setPersons(persons.concat(response.data))
 					setMessage(`Added ${newName}`)
 					setTimeout(() => { setMessage(null) }, 5000)
+				})
+				.catch(error => {
+					setColor('red')
+					setMessage(error.response.data.error)
+					setTimeout(() => {
+						setMessage(null)
+						setColor('green')
+					}, 5000)
 				})
 		}
 		setNewName('')
