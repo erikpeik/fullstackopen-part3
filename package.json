@@ -10,6 +10,7 @@
 		"deploy": "fly deploy",
 		"deploy:full": "npm run build:ui && npm run deploy",
 		"logs:prod": "fly logs",
+		"lint": "eslint .",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -23,6 +24,7 @@
 	},
 	"homepage": "https://github.com/erikpeik/fullstackopen-part3#readme",
 	"devDependencies": {
+		"eslint": "^8.27.0",
 		"nodemon": "^2.0.19"
 	},
 	"dependencies": {
